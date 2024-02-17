@@ -1,0 +1,7 @@
+Classifier, Original_score, DP_score
+NB, 0.781, 0.727
+DT, 0.775, 0.757
+kNN, 0.771, 0.724
+RF, 0.769, 0.747
+LR, 0.781, 0.755
+AB, 0.784, 0.749
