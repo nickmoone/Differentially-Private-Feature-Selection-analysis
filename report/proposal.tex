@@ -1,0 +1,264 @@
+\documentclass[a4paper,10pt,titlepage]{report}
+%%This template is based on Paco van Beckhoven's thesis. 
+
+\usepackage{xspace}
+\usepackage{xargs}   % Use more than one optional parameter in a new commands
+\usepackage[pdftex,dvipsnames]{xcolor}
+
+% Putting images next to each other
+\usepackage[font=bf,]{caption}
+\usepackage{subcaption}
+\input{glyphtounicode}
+
+% for last page
+\usepackage{lastpage}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{csquotes}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{paralist}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage{titlepic}
+\usepackage{vhistory}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage[backend=biber, style=ieee,citestyle=numeric-comp]{biblatex}
+\usepackage[colorinlistoftodos, prependcaption]{todonotes}
+\usepackage{placeins}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb}
+\usepackage[hidelinks]{hyperref}
+\usepackage[acronym,nogroupskip,nohypertypes={acronym},toc,section=chapter]{glossaries}
+\usepackage{amssymb}
+\usepackage{verbatim}
+\usepackage{cmap}
+\usepackage{float}
+
+%\usepackage[ansinew]{inputenc}
+%\usepackage[T1]{fontenc}
+%\usepackage{libertine}
+\input{glyphtounicode}
+
+\pdfglyphtounicode{f_f}{FB00}
+\pdfglyphtounicode{f_f_i}{FB03}
+\pdfglyphtounicode{f_f_l}{FB04}
+\pdfglyphtounicode{f_i}{FB01}
+
+\pdfgentounicode=1
+
+
+
+%Appendix package + appendix in chapter title
+\usepackage[titletoc]{appendix}
+
+
+
+
+%for highlighting findings
+\usepackage{tcolorbox}
+
+% for highlighting code examples
+\usepackage{listings}
+
+\newcommand{\ie}{\emph{i.e.},\xspace}
+\newcommand{\eg}{\emph{e.g.},\xspace}
+\newcommand{\etc}{\emph{etc.}\xspace}
+\newcommand{\etal}{\emph{et al.}\xspace}
+
+\newcommand{\sig}{\gls{sig}}
+\newcommand{\sigs}{\glspl{sig}}
+
+\newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1, inline]{#2}}
+\newcommandx{\discussion}[2][1=]{\todo[linecolor=red,backgroundcolor=green!25,bordercolor=red,inline,#1]{#2}}
+
+\newcommandx{\improvement}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+
+\newcommandx{\reminder}[2][1=]{\todo[linecolor=yellow,backgroundcolor=yellow!25,bordercolor=yellow,#1]{#2}}
+
+\newcommandx{\lessprio}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+\newcommandx{\todocontent}[2][1=]{\todo[author=\textbf{Planned content},backgroundcolor=Goldenrod!25,bordercolor=Goldenrod,inline,#1]{#2}}
+
+
+%%Some additional table column specifiers, allowing for fixed width columns that wrap.
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+
+\definecolor{ryel}{HTML}{fcd116}
+\definecolor{rred}{HTML}{ce1126}
+\definecolor{rblu}{HTML}{0a3eb9}
+%these are examples of commands that may facilitate feedback annotations in the document
+%replace \paco by your name and \ana by your supervisor's name
+%\newcommandx{\ana}[2][1=]{\todo[linecolor=rblu,backgroundcolor=ryel,bordercolor=rred,#1]{#2}}
+%\newcommandx{\paco}[2][1=]{\todo[author=Paco,linecolor=blue,backgroundcolor=white,bordercolor=red,#1]{#2}}
+
+
+% -- title page is a modified version of https://github.com/software-engineering-amsterdam/latex/blob/master/thesis/uvamscse.cls
+\newcommand{\email}[1]{\ttfamily\href{mailto:#1}{#1}}
+
+\newcommand{\uvacoverfoot}{%
+	\vfill
+	\begin{center}
+		\begin{tabular}{r|l}
+			\multirow{3}{*}{\includegraphics[height=48pt]{uva.pdf}}
+			&\textsc{\Large University of Amsterdam}\\
+			% &\textsc{Faculteit der Natuurwetenschappen, Wiskunde en Informatica}\\
+			&\textsc{Master Security and Network Engineering}\\
+			&\url{http://www.os3.nl/}
+		\end{tabular}
+	\end{center}
+}
+
+\renewcommand{\maketitle}{%
+	% The cover page
+	% --------------
+	\thispagestyle{empty}
+	\enlargethispage{30pt}
+	\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+	% Will be page 0, s.t. contents start on page 1
+	\setcounter{page}{0}
+	% \eccoverhead
+	% Volume and article title, author(s)
+	\vspace{60pt}
+	\begin{center}
+		{\Huge\bfseries Feature Selection on a Differentially Private Dataset \par}
+		\vspace{11pt}
+        { Short project (1 month) \par}
+
+        
+		\vspace{11pt}
+        {\Large Project proposal \par}
+		
+		\vspace{44pt}
+		{\Large\bfseries Nick Moone \par}
+		\email{nick.moone@os3.nl}\\
+		\vspace{11pt}
+		\today, \pageref{LastPage} pages
+	\end{center}
+	\vfill
+    \begin{center}
+    	\begin{tabular}{ll}
+    		\textbf{Academic supervisor:} 	& Mina Alishahi, \email{mina.sheikhalishahi@ou.nl} \\
+    		\textbf{Supervisor affiliation:} & Open Universiteit, \url{https://www.ou.nl/}
+    	\end{tabular}
+    \end{center}
+	\uvacoverfoot
+	\newpage
+	\setcounter{footnote}{0}
+	\renewcommand{\thefootnote}{\arabic{footnote}}
+	\setlength{\parskip}{0pt}
+}
+
+%\newcommand{\uvaabstract}{}latex 
+%\renewcommand{\abstract}[2][Abstract]{\renewcommand{\uvaabstract}{\chapter*{Abstract}%
+%\par#2\newpage}}
+
+
+%-------- End of ``title page''
+
+%Fancy page headers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+
+
+%%FINDING ENV
+\newcounter{findingctr}
+
+\newenvironment{finding}{%      define a custom environment
+	\refstepcounter{findingctr}% increment the environment's counter
+	\begin{tcolorbox}
+	\textbf{Finding \thefindingctr:}
+}{\end{tcolorbox}} 
+% If you want numbers that start with the chapter or section number (e.g. 7.1.1 or 7.1) enable the following lines 
+%\usepackage{amsmath}
+%\numberwithin{findingctr}{chapter}
+
+
+% Decrease the size of all these lists
+\setlist{noitemsep,topsep=4pt,parsep=1pt,partopsep=4pt}
+
+
+\lstset{
+	basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	frame=single,                    % adds a frame around the code
+	language=Java,                 % the language of the code
+	keywordstyle=\bf,
+	tabsize=2                       % sets default tabsize to 2 spaces
+}
+
+%make it fit more nicely
+\setlength\extrarowheight{2pt}
+
+
+\input{acronym}
+\makeglossaries
+\bibliography{main}
+
+\begin{document}
+
+
+
+\maketitle
+\input{sections/abstract}
+% \tableofcontents
+\input{sections/introduction}
+% \input{sections/background}
+
+\chapter{Approach}
+The selected datasets (see section \ref{sec:datasets}) will be transformed into differentially private \cite{dpuitleg} datasets using the PrivSyn algorithm \cite{privsyn}. Based on the results after transformation, the research questions will be answered.
+
+\chapter{Comparison with state of the art}
+The current state of the art \cite{originalpaper} adds anonymization to datasets by using multiple kinds of anonymization techniques, such as k-anonymity, l-diversity and t-closeness. While these techniques are good at protecting individual's privacy in datasets, this approach does not prevent reidentification of individuals \cite{dpuitleg}. Therefore with this research we will use differential privacy to transform the dataset into one that provides a provable privacy guarantee for individuals in the original dataset. This has never been done and analysed before using differential privacy, so this adds to the state of the art because it can replace existing anonymity and privacy techniques with a this provable privacy technique.
+
+\chapter{Requirements}
+The algorithm of the PrivSyn algorithm explained in \cite{privsyn} will be used for transforming datasets into differentially private datasets.
+The PrivSyn algorithm will be implemented in the programming language Python (3.12).
+Three publicly available datasets (see section \ref{sec:datasets}) will be used to base the analysis on.
+
+\section{Datasets}
+\label{sec:datasets}
+For this research the same datasets from the UCI Repository \cite{datasetsrepo} will be used as in the paper this research follows up on \cite{originalpaper}. 
+
+\paragraph{Adult}: The dataset contains 198649 instances described by 15 features, which are both numerical and categorical. The class attribute represents the users’ income, which has two possible values: ‘> 50k’ and ‘< 50k’.
+\paragraph{Mushroom}: The dataset includes 8124 hypothetical samples of grilled mushrooms in the Agaricus and Lepiota Family. Each instance is described with 21 categorical features, to predict whether an instance is poisonous.
+\paragraph{Optical Digits (Optic)}: The dataset contains 5620 handwrit- ten digits written by 43 persons. Each record is a matrix of 8x8 (64 numerical features) where each feature is an integer in the range {0, . . . , 16} and the class label is one of the integer numbers in the set {0,...,9}.
+
+\chapter{Planning}
+Figure \ref{fig:initialplanning} shows the initial time planning for the project.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/proposal/Scherm­afbeelding 2024-01-12 om 14.40.53.png}
+    \caption{Initial time planning}
+    \label{fig:initialplanning}
+\end{figure}
+
+\chapter{Expected results}
+The expected result of this project is an implementation of the PrivSyn \cite{privsyn} algorithm in Python, able to transform the selected datasets (mentioned in section \ref{sec:datasets}) into differentially private datasets. Also an analysis will be delivered of the impact of making the datasets on the feature significance of the datasets.
+
+% \input{sections/research}
+% \input{sections/results}
+% \input{sections/discussion}
+% \input{sections/related_work}
+% \input{sections/conclusion}
+% \input{sections/acknowledgements}
+
+\printbibliography[heading=bibintoc]
+\printglossaries%
+
+% \input{sections/appendix}
+
+%comment out in the final version
+%\listoftodos[Notes]
+
+\end{document}

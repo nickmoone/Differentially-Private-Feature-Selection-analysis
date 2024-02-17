@@ -1,0 +1,87 @@
+\chapter{Background}
+\label{ch:background}
+
+\section{Feature selection}
+Feature selection highlights the significance of features in a dataset \cite{featureselectionzhang}, it is a technique for optimizing datasets and allows for efficient data analysis and machine learning tasks. The main motivations for feature selection are enhancing the models' performance, reducing computation cost, and mitigating the risk of overfitting.
+By selecting only the most relevant and informative features from a large and noisy dataset, the size of the dataset can be reduced while maintaining its feature significance. Resulting in simpler, better interpretable, and more robust models.
+
+\subsection{Feature selection methods}
+Four well-known feature selection methods are considered: Chi-square, Information Gain, Anova F-Value, and Pearson correlation. These methods calculate significance scores for each individual feature in a dataset, allowing for the ranking of features based on their significance.
+\paragraph{Chi-square}
+($\chi^2$) is typically used in statistics to test the independence of two events. In feature selection, the $\chi^2$ test is used to test whether the occurrence of a specific feature $A_k$ and class labels $C$ are independent \cite{originalpaper}.
+
+Its score is calculated using the following formula:
+\begin{align}
+    \mathcal{J}_{\chi^2}(C,A_k) = \sum_{l=1}^{L}\sum_{j=1}^{|A_{k}|}\frac{n_{0}(c_{l},v^{k}_{j}) - n_{e}(c_{l},v^{k}_{j})}{n_{e}(c_{l},v^{k}_{j})},
+\end{align}
+where $n_{0}(c_{l},v^{k}_{j}$ is the number of instances with class label $c_l$ and respecting the $j$'th value of feature $A_k$; and
+\begin{align}
+    n_{e}(c_{l},v^{k}_{j}) = \frac{n_{0}(c_{l})*n_{0}(v^{k}_{j})}{n},
+\end{align}
+where $n$ is the total number of records in the dataset, and $n_{0}(c_{l})$ and $n_{0}(v^{k}_{j})$ are the number of records with class label $c_l$ and the ones with value $v^{k}_{j}$ respectively. The higher value of $\mathcal{J}_{\chi^2}(C,A_k)$ shows a higher dependency between the feature and class labels.
+
+\paragraph{Information Gain}
+gives a measure of the amount of shared information between a feature and class labels in a dataset \cite{originalpaper}. Let $A_k$ and $C$ be two discrete variables, the entropy of $C$ is defined as:
+\begin{align}
+    H(C) = -\sum_{c_l \in C}{p(c_l)log_{2}(p(c_l))},
+\end{align}
+where $p(c_l)$ is the probability of $c_l$ occurring in the dataset. The conditional entropy of $C$ given $A_k$ is computed as:
+\begin{align}
+    H(C|A_k) = -\sum_{v^{k}_{j} \in A_{k}} \sum_{c_{l} \in C} p(v^{k}_{j})p(c_{l}|v^{k}_{j}) log_{2}(p(c_{l}|v^{k}_{j})).
+\end{align}
+The information gain of variable $A_k$ dependent to variable $C$, the mutual information of $A_k$ and $C$, is defined as:
+\begin{align}
+    \mathcal{I}(C, A_{k}) = H(C) - H(C|A_k)
+\end{align}
+The higher value of $\mathcal{I}(C, A_{k})$ shows more relevance of the feature in class discrimination.
+
+\paragraph{Anova F-value}
+determines the ratio of explained variance to unexplained variance \cite{originalpaper}. In the context of feature selection, for each feature the hypotheses are defined as:\\
+
+$H_{0} : \mu_{1} = \mu_{2} = ... = \mu_{L}$, $H_{1} : \mu_{1}, \mu_{2}, ..., \mu_{L}$ are not equal,\\
+
+where $\mu_{l}$ is the mean of the $l$'th class. The total mean is computed as $\mu = \frac{1}{n} \sum^{L}_{l=1} n_{l} \mu_{l}$ for $n_l$ being the number of records respecting class label $c_l$. The mean of samples for feature $A_k$ is computed as $\overline{x^k} = \frac{1}{n} \sum^{n_k}_{j=1}x_{ij}$, while the total average $\overline{x}$ is computed as $\overline{x} = \frac{1}{n} \sum^{L}_{l=1} \sum^{n_k}_{i=1} x_{il}$. Accordingly, the sum of mean squared within groups ($S_E$) and the sum of mean squared deviation between groups ($S_A$) are computed as:
+\begin{align}
+    S_{E} = \sum^{L}_{l=1} \sum^{n_k}_{i=1} (x_{il} - \overline{x_{k}})^2, S_{A} = \sum^{L}_{l=1} \sum^{n_k}_{i=1} (\overline{x_{k}} - \overline{x})^2.
+\end{align}
+Then, the Anova F-value is computed as $F = \frac{S_{A}/(L-1)}{S_{E}/(n-L)}$. The higher value of $F$ shows a higher correlation between a feature and the class labels.
+
+\paragraph{Pearson correlation coefficient} is a statistical measure quantifying the linear relationship between two variables \cite{originalpaper}. The Pearson correlation coefficient ($r$) between feature $A_k$ and class $C$ is calculated as:
+\begin{align}
+r(C, A_{k}) = \frac{\sum^{n}_{i=1}(x^{k}_{i} - \overline{x^{k}}) (x^{C}_{i}-\overline{x^{C}})}{\sqrt{\sum^{n}_{i=1}(x^{k}_{i}-\overline{x^{k}})^{2} \sum^{n}_{i=1}(x^{C}_{i}-\overline{x^{C}})^2}},
+\end{align}
+where $n$ is the number of records in the dataset, $x^{k}_{i}$ and $x^{C}_{i}$ represent the values of feature $A_k$ and class $C$ for the $i$th data point, $\overline{x^{k}}$ and $\overline{x^{C}}$ are the means of feature $A_k$ and class $C$ respectively. The Pearson correlation coefficient ranges from -1 to 1, where a value of 1 indicates a perfect positive linear correlation between a feature and the class; a value of -1 indicates a perfect negative linear correlation between a feature and the class; and a value of 0 indicates no linear relation between the feature and the class.
+A high absolute value of the Pearson correlation coefficient between a feature and the class indicates a strong correlation.
+
+\section{Differential privacy}
+Differential privacy techniques are techniques for transforming a dataset into a synthetic dataset. It is an improvement over various anonymization techniques because the synthetic differentially private dataset has the original schema, it aims at maintaining correlation patterns, and it provides a provable privacy guarantee for the individuals in the original dataset \cite{dpuitleg}.
+
+A downside of differential privacy is that the data in the resulting synthetic dataset is a less accurate representation of the original data than most anonymization techniques provide \cite{dpuitleg}, but many use cases do not require the most accurate representations.
+
+\subsection{Differential privacy parameters}
+\label{sec:difprivparams}
+Differential privacy uses two parameters that need to be considered for applying it, $\delta$ and $\epsilon$. Both parameters indicate how much privacy is desired in the resulting synthetic dataset. 
+
+$\delta$ represents chance that someones privacy is compromised when the data is accidentally being leaked \cite{dpparams}, lower values of $\delta$ provide higher privacy and more noise added to the data. The value of $\delta$ is usually fixed to $\frac{1}{n^2}$, where $n$ is the number of instances in the dataset.
+
+$\epsilon$ controls the level of privacy given by the differentially privacy method \cite{dpparams}. The value of $\epsilon$ can range between $0$ and $10$, and is normally chosen between $1$ and $5$. Values between $0$ and $1$ provide very high privacy, but make the synthetic data a lot less accurate than values higher than $1$.
+
+% TODO differential privacy algorithms (privsyn)
+
+\section{Evaluation metrics}
+In this research the performance of feature selection in the generated differentially private dataset is compared to that of the original dataset using two distance metrics: Root Mean Square Error, and Kendall Tau distance.
+
+\paragraph{Root Mean Square Error}
+(RMSE) measures the error of a model in predicting quantitative data \cite{originalpaper}. For the two vectors of observed values $S = (s_{1},...,s_{K})$ and predicted values $S' = (s'_{1},...,s'_{K})$ the RMSE is computed as:
+\begin{align}
+    RMSE(S,S') = \sqrt{\sum^{K}_{i=1}\frac{(s_{i}-s_{i}')^2}{K}}
+\end{align}
+For feature selection the RMSE is calculated between the feature's score and the class score.
+
+\paragraph{Kendall Tau distance}
+measures the ordinal association between two ranking lists \cite{originalpaper}. Formally, for two ranking lists $\tau_1$ and $\tau_2$, the Kendall Tau distance is computed as:
+\begin{align}
+    \mathcal{K}(\tau_{1}, \tau_{2}) = |\{(i,j) : i < j, (\tau_{1}(i) < \tau_{1}(j) \wedge \tau_{2}(i) > \tau_{2}(j)) \vee (\tau_{1}(i) > \tau_{1}(j) \wedge \tau_{2}(i) < \tau_{2}(j))\}|,
+\end{align}
+where $\tau_{1}(i)$ and $\tau_{2}(i)$ are the ranks of the $i$th element in $\tau_{1}$ and $\tau_{2}$ respectively.
+

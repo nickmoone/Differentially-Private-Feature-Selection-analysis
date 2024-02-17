@@ -1,0 +1,64 @@
+\chapter{Method}
+\label{ch:method}
+
+\section{Experimental setup}
+\subsection{Datasets}
+The analysis of this research is performed using three datasets from the open source UCI Machine Learning repository \cite{datasetsrepo}. These datasets are chosen to have a mix of numerical and categorical, categorical-only, and numerical-only features. The chosen datasets are Adult, Mushroom, and Optical Recognition of Handwritten Digits.
+
+\paragraph{Adult}
+contains 48842 instances described by fourteen features and one class. The features are both numerical and categorical. The class can have two possible values.
+
+\paragraph{Mushroom}
+contains 8124 instances described by twenty-two features and one class label. The features are categorical-only. The class can have two possible values.
+
+\paragraph{Optical Recognition of Handwritten Digits}
+(Optic) contains 5620 instances described by sixty-four features and one class label. The features are numerical only. The class can have ten possible values.
+
+\subsection{Generating differentially private datasets}
+All datasets are transformed into differentially private datasets using the PrivSyn algorithm \cite{privsyn}. PrivSyn is the first automatic differentially private synthetic data generation algorithm that can handle general tabular datasets, and it uses techniques that won the 2018 NIST Differential Privacy Challenge \cite{nist2018}.\\
+
+For the first three research questions the differential privacy parameters are fixed to common values \cite{dpparams}. $delta$ is fixed to $\frac{1}{n^2}$, where $n$ is the number of instances in the dataset. $\epsilon$ is fixed to $2$, as this value provides high privacy and is in the range of usual $\epsilon$ values. 
+% TODO appendix maken met gebruikte delta values
+
+\section{Feature selection technique analysis}
+To answer our first research question we compare the performance of four well known feature selection techniques: Chi-square, Information Gain, Anova F-value, and Pearson Correlation coefficient. We do this for each dataset by computing the feature selection scores of each feature selection technique and comparing it to the feature selection scores on the equivalent differential private dataset. The comparison is done by calculating the Root Mean Square Error (RMSE) and the Kendall Tau distance.
+
+This results in an overview of what feature selection technique returns the most accurate results and what evaluation metric provides the most informative behaviour. We use this feature selection technique and evaluation metric to answer the remaining research questions.
+
+\section{Correlation patterns analysis}
+To answer our second research question and gain insight into how the correlation between features is preserved in differentially private datasets compared to the original dataset, we create heatmaps of features' Pearson correlation scores. We do this by calculating the Pearson correlation score from any feature to any feature in the datasets, resulting in a Pearson correlation matrix that can be plotted as a heatmap.
+
+Analysing the differences in between the heatmap created from the original data and the heatmap created from the differentially private data gives us an indication of how correlations between features change when transforming a dataset into a differentially private dataset.
+
+\section{Influence of input dataset properties}
+To answer our third research question we created subsets the Optic dataset with varying number of instances (dataset size), number of class labels and number of features. We only consider the Optic dataset as it has the highest number of class labels and features.
+
+\subsection{Dataset size}
+To evaluate the impact of the dataset size on the preservation of features' importance, we measure and compare the RMSE between features' scores using the Pearson correlation in the differentially private dataset and the original dataset. We do this for dataset sizes of 5, 20, 40, 60, 80, and 100 percent of the original dataset. %TODO tabel met sizes
+
+\subsection{Number of class labels}
+The impact of the number of class labels on the preservation of features' importance is evaluated by measuring and comparing the RMSE between features' scores using the Pearson correlation in the differentially private dataset and the original dataset. We do this using subsets of the original dataset with 2, 3, 4, 5, 6, 7, 8, 9, and 10 unique class labels.
+
+\subsection{Number of features}
+We evaluate the impact of the number of class labels on the preservation of features' importance by measuring and comparing the RMSE between features' scores using the Pearson correlation in the differentially private dataset and the original dataset. We do this using subsets of the original dataset with 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, and 64 features.
+
+\section{Influence of differential privacy parameter}
+To answer our fourth research we analyse the impact of varying the differential privacy parameter. As found in section \ref{sec:difprivparams} the only differential privacy parameter we can analyse is $\epsilon$. To do this we create multiple differentially private versions of the complete Optic dataset by using $\epsilon$ values of 0.5, 1, 2, 3, 5, and 10 in our differential privacy algorithm. We evaluate the impact of the value of $\epsilon$ on the preservation of features' importance by measuring and comparing the RMSE between features' scores using the Pearson correlation in the differentially private datasets and the original datasets for each $\epsilon$ value.
+
+\section{Differential privacy impact on classifiers}
+To answer our fifth research question we investigate how the accuracy of classifiers is affected when they are trained on the subset of features selected using the Pearson correlation method using the differentially private dataset compared to the original dataset. We use six popular classification algorithms: Native Bayes, Decision Tree, k-Nearest Neighbors, Random Forest, Linear Regression, and AdaBoost. These classification algorithms are trained on feature selected datasets after keeping 20\% of the most relevant features. The most relevant features are the ones with the highest feature scores using Pearson correlation. The performance of classifiers is assessed using the 5-fold cross-validation method \cite{crossvalidation}.
+
+We only consider the Adult dataset here, as the features in this dataset are both numerical and categorical.
+
+
+% Bij het analyseren van goede dataset size enz misschien epsilon van 1 gebruiken, want Stronger privacy guarantees are provided by a smaller ϵ ϵ, but the output may be less useful as a result [6]. ϵ ϵ controls the amount of noise added to the data and shows how much the output probability distribution can change when the data of a single person is altered. [https://ealizadeh.com/blog/abc-of-differential-privacy/]
+
+
+
+% When using pearson:
+% The correlation matrix helps us gain valuable insights into the underlying relationships between variables, enabling us to focus on the essential factors influencing the target outcome.
+
+
+% Depending on your subject, you might need multiple research chapters. Moreover, depending on how the research questions are linked, you may need to answer them one by one and then connect the answers into a final discussion chapter. 
+
+% See Canvas for examples of theses with various approaches to structuring the research content.

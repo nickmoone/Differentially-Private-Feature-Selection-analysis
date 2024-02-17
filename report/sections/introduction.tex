@@ -1,0 +1,52 @@
+\chapter{Introduction}
+\label{ch:introduction}
+In the age of data-driven decision-making and machine learning applications, safeguarding data privacy has emerged as a critical concern. With the use of personal data for these applications, methods are required for anonymizing data to protect the origin's identity. Privacy preserving and anonymization techniques exist, but these approaches may impact the significance of features in the original dataset, potentially affecting the accuracy and reliability of subsequent machine learning tasks. Previous research explored the preservation of feature significance in a dataset after anonymization techniques were applied \cite{originalpaper}. As anonymization techniques cannot entirely prevent re-identification of individuals in datasets \cite{dpuitleg}, this research builds upon the earlier work by investigating feature selection after applying differential privacy techniques as a stronger privacy mechanism.
+
+Feature significance allows for understanding the relationships between the features and the target variables in a dataset, which plays a crucial role in data analysis and machine learning tasks. Its primary motivation stems from the desire to enhance model performance, reduce computation costs, and mitigate the risk of overfitting. By selecting the most relevant and informative features from a potentially large and noisy dataset, the efficiency and accuracy of models can be improved. The preservation of feature significance gives an indication of how well the dataset after making it differentially private is suitable for data analysis and machine learning tasks.
+
+Transforming a dataset into a differentially private dataset may influence the datasets' features' significance, potentially making it less suitable for data analysis and machine learning. Differential privacy techniques add a provable privacy guarantee to individuals in an original dataset, and at the same time it attempts to maintain properties (e.g., schema and correlations between attributes) of the original dataset \cite{dpuitleg}. This research will explore till what extend the features' significance of a dataset is influenced by applying differential privacy techniques on it.
+
+By ensuring that the significance of features is retained during anonymization processes, we can protect the performance and interpretability of machine learning models, enabling them to make more accurate predictions at less costs.\\
+
+Our research presents a comprehensive investigation of the implications of applying differential privacy techniques implemented by the PrivSyn algorithm \cite{privsyn} on feature's significance, it is driven by the need to explore the trade-offs between privacy preservation and data utility. We answer five fundamental research questions that explore various dimensions of feature significance in the context of differential privacy. By doing this we aim to provide insights into the effects of making a dataset differentially private using various differential privacy parameters on the interpretability, accuracy, and generalizability of classifiers trained on differentially private datasets.
+
+% TODO laatste deel van intro mina paper met contributions
+
+% TODO problem statement uit paper (architecture figure en uitleggen waarom dit nodig is)
+
+\section{Research questions}
+We guide our research using the following research questions:\\
+\textbf{RQ1} Which feature selection technique outperforms the others in preserving the significant scores of features in a dataset?
+Here we evaluate the performance of various feature selection techniques on the preservation of features' significance in differentially private datasets compared to the original datasets. We do this by employing four widely recognized filter-based feature selection methods. With this analysis we aim to identify the feature selection technique that best retains the characteristics of the original datasets in the differential private datasets, so we can use this feature selection technique to answer our further research questions.
+
+\textbf{RQ2} How do the correlation patterns between features change in the differentially private dataset compared to the original one?
+Here we explore how the correlation patterns between features change when transforming a dataset into a differentially private dataset. To do this we compute the correlation matrices for both the original and the differentially private dataset. Comparing these gives us a measure of how strongly correlated features are related in a dataset, and how making the dataset differentially private affects strongly correlated features.
+
+\textbf{RQ3} How does the variation in input datasets’ properties, such as dataset size, number of features, and number of labels, influence the preservation of features’ importance?
+Here by investigating the impact of input dataset characteristics, we aim to gain insight into the relationship between dataset properties and the ability to maintain the significance of features in the differentially private dataset.
+
+\textbf{RQ4} How does the variation of differential privacy techniques’ parameters impact the preservation of features’ importance?
+Here we explore the effects of adjusting the privacy parameters of the differential privacy algorithm on the significance of features. With this question we aim to find a balance between privacy protection and data utility.
+
+\textbf{RQ5} How does feature selection, specifically the removal of irrelevant features, impact the accuracy of classifiers trained on both the original and differentially private datasets?
+With this research question we investigate the effect of feature selection on a differentially private dataset. We do this by comparing the performance of classifiers trained on selected features of both the original dataset and the differentially private dataset.
+
+% TODO
+% \section{Contributions}
+% Our research makes the following contributions:
+% \begin{enumerate}
+% 	\item 
+% 	\item An analysis of the impact of transforming a dataset into a differentially private dataset on its feature significance.
+% 	\item An analysis the impact of the impact of datasets' properties, e.g., dataset size, in preserving the features' importance.
+% \end{enumerate}
+
+\input{sections/ethics.tex}
+
+% \section{Project scope}
+
+% \section{Outline}
+% In Chapter~\ref{ch:background} we describe the background of this thesis. 
+% Chapter~\ref{ch:research} describes ... 
+% Results are shown in Chapter~\ref{ch:results} and discussed in Chapter~\ref{ch:discussion}. Chapter~\ref{ch:related_work}, contains the work related to this thesis.
+% Finally, we present our concluding remarks in Chapter~\ref{ch:conclusion} together with future work.
+

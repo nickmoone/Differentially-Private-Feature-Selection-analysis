@@ -1,0 +1,22 @@
+\chapter{Conclusion}
+\label{ch:conclusion}
+
+From our first research question we conclude that the Pearson correlation coefficient is the best method for preserving the scores of features in differentially private datasets in comparison to the original dataset. The comparison of feature scores between the original dataset and the differentially private dataset can best be done by calculating the Root Mean Square Error.\\
+
+From the created Pearson correlation matrix heatmaps we observed that correlation patterns between features in a dataset completely change when applying differential privacy.\\
+
+The only noteworthy parameter that influences the Pearson correlation coefficient is the number of class labels, when the number of class labels is below 4 the difference in Pearson correlation coefficient is far worse than when the number of class labels is larger than four.
+The number of features slightly influences the Pearson correlation scores, with number of features below 30 difference in Pearson correlation scores is better than with number of features above 30.\\
+
+The differential privacy parameter $\epsilon$ does not cause a change in Pearson correlation scores at all, for all tested $\epsilon$ values the RMSE between correlation scores before and after applying differential privacy remained the same. \\
+
+From the classifier analysis we observed a slightly worse classifier score when classifiers were trained on a differentially private dataset, compared to the equivalent original dataset. All different classifiers showed similar results.
+
+\section{Future work}
+After answering our research question there is some future work left. 
+
+An in-depth analysis can be done on why the Pearson correlation matrices change so much after differential privacy is applied to a dataset. The change in dataset parameters and differentially privacy parameter can be investigated for other datasets than only the Optic dataset, and the classifier analysis can be done on other datasets.
+
+Also, an analysis and comparison can be done when using another differential privacy framework than PrivSyn.\\
+
+A future study can be done in comparing the results of this research to the results of Feature Selection on Anonymized Datasets \cite{originalpaper}. Then a conclusion can be made on the differences in effects of feature selection on anonymized datasets and feature selection on differentially private datasets.
