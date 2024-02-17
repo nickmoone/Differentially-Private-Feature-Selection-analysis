@@ -1,0 +1,5 @@
+Feature_Selection_technique, RMSE_adult, RMSE_mushroom, RMSE_optic, Kendall_adult, Kendall_mushroom, Kendall_optic
+Chi-square, 0.09618, 0.42, 0.3441, 0.3674, 0.5529, 0.2452
+Information_Gain, 0.5516, 0.314, 0.2667, 0.4886, 0.5738, 0.28263
+Anova_F-value, 0.3751, 0.46, 0.2439, 0.481, 0.5711, 0.2201
+Pearson_correlation_coefficient, 0.1253, 0.2932, 0.08843, 0.4652, 0.526, 0.2573

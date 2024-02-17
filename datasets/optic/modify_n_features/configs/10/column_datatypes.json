@@ -1,0 +1,15 @@
+{
+  "dtype": {
+    "F1": "uint8",
+    "F2": "uint8",
+    "F20": "uint8",
+    "F23": "uint8",
+    "F25": "uint8",
+    "F26": "uint8",
+    "F38": "uint8",
+    "F44": "uint8",
+    "F49": "uint8",
+    "F56": "uint8",
+    "C": "uint8"
+  }
+}
